@@ -1,5 +1,6 @@
 import { Dropdown, Button, Select, Space, Avatar } from "antd";
 import { UsergroupAddOutlined, UserOutlined } from "@ant-design/icons";
+import PropTypes from "prop-types";
 
 const itSupportOptions = [
   {
@@ -36,7 +37,7 @@ const itSupportOptions = [
     name: "David White",
     value: "david_white",
     avatar: "https://dummyimage.com/40x40/000/fff",
-  }
+  },
   // Add more IT support members as needed
 ];
 
@@ -82,5 +83,14 @@ const ActionsColumn = ({
     </Button>
   </Dropdown>
 );
+
+ActionsColumn.propTypes = {
+  record: PropTypes.shape({
+    key: PropTypes.string.isRequired,
+  }).isRequired,
+  handleAssign: PropTypes.func.isRequired,
+  dropdownVisible: PropTypes.string,
+  setDropdownVisible: PropTypes.func.isRequired,
+};
 
 export default ActionsColumn;
