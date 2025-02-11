@@ -7,6 +7,7 @@ import {
   CloseCircleOutlined,
 } from "@ant-design/icons";
 import dayjs from "dayjs";
+import PropTypes from "prop-types";
 
 const { Option } = Select;
 
@@ -107,6 +108,19 @@ const IssueModal = ({ visible, onOk, onCancel, editingRecord }) => {
       </Form>
     </Modal>
   );
+};
+
+IssueModal.propTypes = {
+  visible: PropTypes.bool.isRequired,
+  onOk: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  editingRecord: PropTypes.shape({
+    id: PropTypes.string,
+    issue: PropTypes.string,
+    date: PropTypes.string,
+    employee: PropTypes.string,
+    status: PropTypes.string,
+  }),
 };
 
 export default IssueModal;

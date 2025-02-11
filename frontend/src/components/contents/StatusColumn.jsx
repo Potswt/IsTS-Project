@@ -5,6 +5,7 @@ import {
   SyncOutlined,
   CloseCircleOutlined,
 } from "@ant-design/icons";
+import PropTypes from "prop-types";
 
 const { Option } = Select;
 
@@ -54,5 +55,13 @@ const StatusColumn = ({ text, record, handleStatusChange }) => (
     </Option>
   </Select>
 );
+
+StatusColumn.propTypes = {
+  text: PropTypes.string.isRequired,
+  record: PropTypes.shape({
+    key: PropTypes.string.isRequired,
+  }).isRequired,
+  handleStatusChange: PropTypes.func.isRequired,
+};
 
 export default StatusColumn;
