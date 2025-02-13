@@ -94,7 +94,7 @@ const Sidebar = () => {
         onCollapse={(value) => setCollapsed(value)}
         breakpoint="lg"
         collapsedWidth="65"
-        style={{ backgroundColor: "#ffffff" }}
+        className="bg-white"
         width={200}>
         <div className="logo-container mt-6">
           <Link to="/">

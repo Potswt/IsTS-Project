@@ -6,7 +6,6 @@ import {
   Space,
   Dropdown,
   message,
-  Skeleton,
   theme,
   Avatar,
 } from "antd";
@@ -15,6 +14,7 @@ import SearchColumn from "./SearchColumn";
 import StatusColumn from "./StatusColumn";
 import AssigneesColumn from "./AssigneesColumn";
 import ActionsColumn from "./ActionsColumn";
+import TableSkeleton from "../skeletons/TableSkeleton"; // Import TableSkeleton
 
 const { Content } = Layout;
 
@@ -204,7 +204,7 @@ const AssignmentTable = () => {
           </Button>
         </div>
         {loading ? (
-          <Skeleton active />
+          <TableSkeleton />
         ) : (
           <Table
             dataSource={dataSource}

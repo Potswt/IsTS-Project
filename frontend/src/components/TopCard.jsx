@@ -1,4 +1,9 @@
-import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
+import {
+  IssuesCloseOutlined,
+  SyncOutlined,
+  CheckCircleOutlined,
+  ClockCircleOutlined,
+} from "@ant-design/icons";
 import { Card, Col, Row, Statistic } from "antd";
 
 const TopCard = () => (
@@ -6,64 +11,56 @@ const TopCard = () => (
     <Col xs={24} sm={12} md={12} lg={6}>
       <Card
         variant={true}
-        style={{ background: "linear-gradient(to right, #ff7e5f, #feb47b)" }}>
+        style={{ background: "linear-gradient(to right, #91b3e6, #a2d1f3)" }}>
         <Statistic
-          title={<span style={{ color: "#ffffff" }}>Active</span>}
-          value={11.28}
-          precision={2}
+          title={<span style={{ color: "#ffffff" }}>ปัญหาทั้งหมดตอนนี้</span>}
           valueStyle={{
             color: "#ffffff",
           }}
-          prefix={<ArrowUpOutlined />}
-          suffix="%"
+          prefix={<IssuesCloseOutlined />}
+          value={0}
         />
       </Card>
     </Col>
     <Col xs={24} sm={12} md={12} lg={6}>
       <Card
         variant={true}
-        style={{ background: "linear-gradient(to right, #6a11cb, #2575fc)" }}>
+        style={{ background: "linear-gradient(to right, #e08b6d, #e5c05b)" }}>
         <Statistic
-          title={<span style={{ color: "#ffffff" }}>Idle</span>}
-          value={9.3}
-          precision={2}
+          title={<span style={{ color: "#ffffff" }}>กำลังดำเนินการ</span>}
           valueStyle={{
             color: "#ffffff",
           }}
-          prefix={<ArrowDownOutlined />}
-          suffix="%"
+          prefix={<SyncOutlined />}
+          value={0}
         />
       </Card>
     </Col>
     <Col xs={24} sm={12} md={12} lg={6}>
       <Card
         variant={true}
-        style={{ background: "linear-gradient(to right, #ff7e5f, #feb47b)" }}>
+        style={{ background: "linear-gradient(to right, #4e8b2b, #8dbf4f)" }}>
         <Statistic
-          title={<span style={{ color: "#ffffff" }}>Active</span>}
-          value={11.28}
-          precision={2}
+          title={<span style={{ color: "#ffffff" }}>เสร็จสิ้น</span>}
           valueStyle={{
             color: "#ffffff",
           }}
-          prefix={<ArrowUpOutlined />}
-          suffix="%"
+          prefix={<CheckCircleOutlined />}
+          value={0}
         />
       </Card>
     </Col>
     <Col xs={24} sm={12} md={12} lg={6}>
       <Card
         variant={true}
-        style={{ background: "linear-gradient(to right, #6a11cb, #2575fc)" }}>
+        style={{ background: "linear-gradient(to right, #e05a5a, #a35dbb)" }}>
         <Statistic
-          title={<span style={{ color: "#ffffff" }}>Idle</span>}
-          value={9.3}
-          precision={2}
+          title={<span style={{ color: "#ffffff" }}>รอกำเนินการ</span>}
           valueStyle={{
             color: "#ffffff",
           }}
-          prefix={<ArrowDownOutlined />}
-          suffix="%"
+          prefix={<ClockCircleOutlined />}
+          value={0}
         />
       </Card>
     </Col>

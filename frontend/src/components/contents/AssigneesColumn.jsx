@@ -3,7 +3,14 @@ import { UserOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 
 const AssigneesColumn = ({ assignees }) => (
-  <Avatar.Group>
+  <Avatar.Group
+    max={{
+      count: 2,
+      style: {
+        color: "black",
+        backgroundColor: "#add8e6", // light blue
+      },
+    }}>
     {assignees.map((assignee) => (
       <Avatar
         key={assignee.name}

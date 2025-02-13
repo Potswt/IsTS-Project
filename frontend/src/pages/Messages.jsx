@@ -1,4 +1,4 @@
-import ContentMessages from "../components/contents/ContentMessages";
+import ContentMessages from "../components/contents/chat/ContentMessages";
 
 const Messages = () => {
   return (

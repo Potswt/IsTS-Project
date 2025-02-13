@@ -48,10 +48,7 @@
   padding: 10px;
 }
 
-.logo {
-  max-width: 100%;
-  height: auto;
-}
+
 
 /* Add dropshadow to Header */
 .ant-layout-header {

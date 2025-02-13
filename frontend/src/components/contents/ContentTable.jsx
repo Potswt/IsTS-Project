@@ -6,7 +6,6 @@ import {
   Space,
   Dropdown,
   message,
-  Skeleton,
   theme,
   Avatar,
   Modal,
@@ -23,6 +22,7 @@ import IssueModal from "./IssueModal"; // Import the new component
 import { Link } from "react-router"; // Import Link from react-router-dom
 import SearchColumn from "./SearchColumn";
 import StatusColumn from "./StatusColumn";
+import TableSkeleton from "../skeletons/TableSkeleton"; // Import TableSkeleton
 
 const { Content } = Layout;
 const { confirm } = Modal;
@@ -237,7 +237,7 @@ const ContentTable = () => {
           </Button>
         </div>
         {loading ? (
-          <Skeleton active />
+          <TableSkeleton />
         ) : (
           <Table
             dataSource={dataSource}
