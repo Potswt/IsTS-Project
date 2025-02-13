@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useForm } from "antd/es/form/Form";
 import { Modal, Form, Input, DatePicker, Select, Tag } from "antd";
 import {
   CheckCircleOutlined,
@@ -19,7 +20,7 @@ const statusColors = {
 };
 
 const IssueModal = ({ visible, onOk, onCancel, editingRecord }) => {
-  const [form] = Form.useForm();
+  const [form] = useForm();
 
   useEffect(() => {
     if (editingRecord) {
