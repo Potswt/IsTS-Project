@@ -70,7 +70,16 @@ const AccountSettings = () => {
         <Input size={"large"} />
       </Form.Item>
       <Form.Item>
-        <Button type="primary" htmlType="submit">
+        <Button
+          type="primary"
+          htmlType="submit"
+          style={{
+            backgroundColor: "#262362",
+            transition: "background-color 0.3s",
+            border: "none",
+          }}
+          onMouseEnter={(e) => (e.target.style.backgroundColor = "#193CB8")}
+          onMouseLeave={(e) => (e.target.style.backgroundColor = "#262362")}>
           Save Changes
         </Button>
       </Form.Item>

@@ -25,9 +25,15 @@ const NotiFications = () => {
       avatar: "https://example.com/path/to/your/image.jpg",
     },
   ]);
+  const [unreadCount, setUnreadCount] = useState(notifications.length);
 
   const handleClearNotifications = () => {
     setNotifications([]);
+    setUnreadCount(0);
+  };
+
+  const handleMenuClick = () => {
+    setUnreadCount(0);
   };
 
   const notificationMenu = (
@@ -57,8 +63,9 @@ const NotiFications = () => {
     <Dropdown
       menu={{ items: [{ key: "notifications", label: notificationMenu }] }}
       trigger={["click"]}
-      placement="bottomRight">
-      <Badge count={notifications.length} overflowCount={99}>
+      placement="bottomRight"
+      onOpenChange={handleMenuClick}>
+      <Badge count={unreadCount} overflowCount={99}>
         <InboxOutlined
           style={{ fontSize: "24px", cursor: "pointer", color: "white" }}
         />

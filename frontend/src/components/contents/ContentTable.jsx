@@ -2,46 +2,36 @@ import { useState, useEffect } from "react";
 import {
   Layout,
   Table,
-  Input,
   Button,
   Space,
   Dropdown,
   message,
-  Select,
-  Tag,
   Skeleton,
-  DatePicker,
   theme,
   Avatar,
   Modal,
 } from "antd";
 import {
-  SearchOutlined,
   EllipsisOutlined,
-  CheckCircleOutlined,
-  SyncOutlined,
-  ClockCircleOutlined,
-  CloseCircleOutlined,
   EditOutlined,
   DeleteOutlined,
   PlusCircleOutlined,
   MessageOutlined,
   ReloadOutlined,
 } from "@ant-design/icons";
-import Highlighter from "react-highlight-words";
 import IssueModal from "./IssueModal"; // Import the new component
 import { Link } from "react-router"; // Import Link from react-router-dom
+import SearchColumn from "./SearchColumn";
+import StatusColumn from "./StatusColumn";
 
 const { Content } = Layout;
-const { Option } = Select;
 const { confirm } = Modal;
 
 const ContentTable = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-  const [searchText, setSearchText] = useState("");
-  const [searchedColumn, setSearchedColumn] = useState("");
+
   const [dataSource, setDataSource] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -69,125 +59,6 @@ const ContentTable = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
-  const getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-    }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={(e) =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
-          }
-          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{ marginBottom: 8, display: "block" }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}>
-            Search
-          </Button>
-          <Button
-            onClick={() => handleReset(clearFilters)}
-            size="small"
-            style={{ width: 90 }}>
-            Reset
-          </Button>
-        </Space>
-      </div>
-    ),
-    filterIcon: (filtered) => (
-      <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
-    ),
-    onFilter: (value, record) =>
-      record[dataIndex]
-        ? record[dataIndex]
-            .toString()
-            .toLowerCase()
-            .includes(value.toLowerCase())
-        : "",
-    render: (text) =>
-      searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-          searchWords={[searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ""}
-        />
-      ) : (
-        text
-      ),
-  });
-
-  const getColumnDateSearchProps = (dataIndex) => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-    }) => (
-      <div style={{ padding: 8 }}>
-        <DatePicker
-          onChange={(date, dateString) =>
-            setSelectedKeys(dateString ? [dateString] : [])
-          }
-          style={{ marginBottom: 8, display: "block" }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}>
-            Search
-          </Button>
-          <Button
-            onClick={() => handleReset(clearFilters)}
-            size="small"
-            style={{ width: 90 }}>
-            Reset
-          </Button>
-        </Space>
-      </div>
-    ),
-    filterIcon: (filtered) => (
-      <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
-    ),
-    onFilter: (value, record) =>
-      record[dataIndex] ? record[dataIndex].toString().includes(value) : "",
-    render: (text) =>
-      searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-          searchWords={[searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ""}
-        />
-      ) : (
-        text
-      ),
-  });
-
-  const handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  };
-
-  const handleReset = (clearFilters) => {
-    clearFilters();
-    setSearchText("");
-  };
 
   const handleStatusChange = (key, newStatus) => {
     const newData = dataSource.map((item) => {
@@ -255,37 +126,30 @@ const ContentTable = () => {
     setIsModalVisible(true);
   };
 
-  const statusColors = {
-    เสร็จสิ้น: "green", // Resolved
-    รอดำเนินการ: "orange", // Pending
-    กำลังดำเนินการ: "blue", // In Progress
-    ถูกปฏิเสธ: "red", // Rejected
-  };
-
   const columns = [
     {
       title: "Issue ID",
       dataIndex: "id",
       key: "id",
-      ...getColumnSearchProps("id"),
+      ...SearchColumn("id"),
     },
     {
       title: "Issue",
       dataIndex: "issue",
       key: "issue",
-      ...getColumnSearchProps("issue"),
+      ...SearchColumn("issue"),
     },
     {
       title: "Date",
       dataIndex: "date",
       key: "date",
-      ...getColumnDateSearchProps("date"),
+      ...SearchColumn("date", true),
     },
     {
       title: "Employee",
       dataIndex: "employee",
       key: "employee",
-      ...getColumnSearchProps("employee"),
+      ...SearchColumn("employee"),
       render: (text, record) => (
         <Space>
           <Avatar src={record.profilePic} />
@@ -301,43 +165,11 @@ const ContentTable = () => {
       dataIndex: "status",
       key: "status",
       render: (text, record) => (
-        <Select
-          value={text}
-          style={{ width: 120 }}
-          onChange={(value) => handleStatusChange(record.key, value)}>
-          <Option value="เสร็จสิ้น">
-            <Tag
-              bordered={false}
-              icon={<CheckCircleOutlined />}
-              color={statusColors["เสร็จสิ้น"]}>
-              เสร็จสิ้น
-            </Tag>
-          </Option>
-          <Option value="รอดำเนินการ">
-            <Tag
-              bordered={false}
-              icon={<ClockCircleOutlined />}
-              color={statusColors["รอดำเนินการ"]}>
-              รอดำเนินการ
-            </Tag>
-          </Option>
-          <Option value="กำลังดำเนินการ">
-            <Tag
-              bordered={false}
-              icon={<SyncOutlined spin />}
-              color={statusColors["กำลังดำเนินการ"]}>
-              กำลังดำเนินการ
-            </Tag>
-          </Option>
-          <Option value="ถูกปฏิเสธ">
-            <Tag
-              bordered={false}
-              icon={<CloseCircleOutlined />}
-              color={statusColors["ถูกปฏิเสธ"]}>
-              ถูกปฏิเสธ
-            </Tag>
-          </Option>
-        </Select>
+        <StatusColumn
+          text={text}
+          record={record}
+          handleStatusChange={handleStatusChange}
+        />
       ),
     },
     {
@@ -378,15 +210,29 @@ const ContentTable = () => {
         }}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Button
+            onMouseEnter={(e) => (e.target.style.backgroundColor = "#193CB8")}
+            onMouseLeave={(e) => (e.target.style.backgroundColor = "#262362")}
             type="primary"
             onClick={handleAdd}
-            style={{ marginBottom: 16 }}>
+            style={{
+              marginBottom: 16,
+              backgroundColor: "#262362",
+              transition: "background-color 0.3s",
+              border: "none",
+            }}>
             <PlusCircleOutlined /> Add Issue
           </Button>
           <Button
+            onMouseEnter={(e) => (e.target.style.backgroundColor = "#193CB8")}
+            onMouseLeave={(e) => (e.target.style.backgroundColor = "#262362")}
             type="primary"
             onClick={fetchData}
-            style={{ marginBottom: 16 }}>
+            style={{
+              marginBottom: 16,
+              backgroundColor: "#262362",
+              transition: "background-color 0.3s",
+              border: "none",
+            }}>
             <ReloadOutlined />
           </Button>
         </div>

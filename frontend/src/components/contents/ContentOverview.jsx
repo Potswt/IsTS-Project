@@ -1,7 +1,18 @@
-import { Layout, Tabs, theme, List, Avatar, Rate, Col, Row } from "antd";
+import {
+  Layout,
+  Tabs,
+  theme,
+  List,
+  Avatar,
+  Rate,
+  Col,
+  Row,
+  Pagination,
+} from "antd";
 import { Content } from "antd/es/layout/layout";
 import AssignmentTable from "./AssignmentTable";
 import TopCard from "../TopCard";
+import { useState } from "react";
 
 const ContentOverview = () => {
   const {
@@ -55,6 +66,18 @@ const ContentOverview = () => {
     },
   ];
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 5;
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const paginatedUsers = users.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
+
   return (
     <Layout>
       <div className="mx-2">
@@ -80,22 +103,32 @@ const ContentOverview = () => {
               key: "2",
               label: "Work reviews",
               children: (
-                <div className="max-h-90 overflow-auto">
-                  <Row gutter={[16, 16]}>
-                    {users.map((user) => (
-                      <Col xs={24} sm={12} md={8} lg={24} key={user.id}>
-                        <List.Item>
-                          <List.Item.Meta
-                            avatar={<Avatar src={user.avatar} />}
-                            title={user.name}
-                            description={user.review}
-                          />
-                          <Rate disabled defaultValue={user.rating} />
-                        </List.Item>
-                      </Col>
-                    ))}
-                  </Row>
-                </div>
+                <Content>
+                  <div className="max-h-90 overflow-auto">
+                    <Row gutter={[16, 16]}>
+                      {paginatedUsers.map((user) => (
+                        <Col xs={24} sm={12} md={8} lg={24} key={user.id}>
+                          <List.Item>
+                            <List.Item.Meta
+                              avatar={<Avatar src={user.avatar} />}
+                              title={user.name}
+                              description={user.review}
+                            />
+                            <Rate disabled defaultValue={user.rating} />
+                          </List.Item>
+                        </Col>
+                      ))}
+                    </Row>
+                  </div>
+                  <Pagination
+                    align="end"
+                    current={currentPage}
+                    pageSize={pageSize}
+                    total={users.length}
+                    onChange={handlePageChange}
+                    style={{ textAlign: "center", marginTop: "16px" }}
+                  />
+                </Content>
               ),
             },
           ]}

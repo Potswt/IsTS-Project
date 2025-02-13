@@ -192,7 +192,14 @@ const AssignmentTable = () => {
           <Button
             type="primary"
             onClick={fetchData}
-            style={{ marginBottom: 16 }}>
+            style={{
+              marginBottom: 16,
+              backgroundColor: "#262362",
+              transition: "background-color 0.3s",
+              border: "none",
+            }}
+            onMouseEnter={(e) => (e.target.style.backgroundColor = "#193CB8")}
+            onMouseLeave={(e) => (e.target.style.backgroundColor = "#262362")}>
             <ReloadOutlined />
           </Button>
         </div>
