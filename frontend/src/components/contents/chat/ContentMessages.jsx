@@ -45,6 +45,7 @@ const ContentMessages = () => {
         borderRadius: borderRadiusLG,
         background: colorBgContainer,
         overflow: "hidden", // Prevent overflow
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Add drop shadow
       }}>
       <motion.div
         initial={{ opacity: 0 }}
