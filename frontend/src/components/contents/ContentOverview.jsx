@@ -12,7 +12,8 @@ import {
 import { Content } from "antd/es/layout/layout";
 import AssignmentTable from "./AssignmentTable";
 import TopCard from "../TopCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import ListSkeleton from "../skeletons/ListSkeleton"; // Import ListSkeleton
 
 const ContentOverview = () => {
   const {
@@ -67,6 +68,7 @@ const ContentOverview = () => {
   ];
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
   const pageSize = 5;
 
   const handlePageChange = (page) => {
@@ -77,6 +79,12 @@ const ContentOverview = () => {
     (currentPage - 1) * pageSize,
     currentPage * pageSize
   );
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000); // Simulate a 1-second loading time
+  }, []);
 
   return (
     <Layout>
@@ -105,20 +113,24 @@ const ContentOverview = () => {
               children: (
                 <Content>
                   <div className="max-h-90 overflow-auto">
-                    <Row gutter={[16, 16]}>
-                      {paginatedUsers.map((user) => (
-                        <Col xs={24} sm={12} md={8} lg={24} key={user.id}>
-                          <List.Item>
-                            <List.Item.Meta
-                              avatar={<Avatar src={user.avatar} />}
-                              title={user.name}
-                              description={user.review}
-                            />
-                            <Rate disabled defaultValue={user.rating} />
-                          </List.Item>
-                        </Col>
-                      ))}
-                    </Row>
+                    {loading ? (
+                      <ListSkeleton />
+                    ) : (
+                      <Row gutter={[16, 16]}>
+                        {paginatedUsers.map((user) => (
+                          <Col xs={24} sm={12} md={8} lg={24} key={user.id}>
+                            <List.Item>
+                              <List.Item.Meta
+                                avatar={<Avatar src={user.avatar} />}
+                                title={user.name}
+                                description={user.review}
+                              />
+                              <Rate disabled defaultValue={user.rating} />
+                            </List.Item>
+                          </Col>
+                        ))}
+                      </Row>
+                    )}
                   </div>
                   <Pagination
                     align="end"

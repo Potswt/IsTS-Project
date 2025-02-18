@@ -11,7 +11,7 @@ import {
 } from "@ant-design/icons";
 import { Link, NavLink, useLocation } from "react-router";
 import logo from "../assets/jib-logo-2.png";
-import { Content, Footer } from "antd/es/layout/layout";
+import { Content } from "antd/es/layout/layout";
 import { Outlet } from "react-router";
 import NotiFications from "./NotiFications";
 
@@ -82,9 +82,9 @@ const Sidebar = () => {
     },
   ];
 
-  const getCurrentYear = () => {
-    return new Date().getFullYear();
-  };
+  // const getCurrentYear = () => {
+  //   return new Date().getFullYear();
+  // };
 
   return (
     <Layout style={{ height: "100vh", width: "100vw" }}>
@@ -93,9 +93,9 @@ const Sidebar = () => {
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
         breakpoint="lg"
-        collapsedWidth="65"
+        collapsedWidth="50"
         className="bg-white"
-        width={200}>
+        width={160}>
         <div className="logo-container mt-6">
           <Link to="/">
             <img src={logo} alt="logo" />
@@ -138,9 +138,9 @@ const Sidebar = () => {
         <Content style={{ padding: "16px", overflow: "auto" }}>
           <Outlet />
         </Content>
-        <Footer style={{ textAlign: "center" }}>
+        {/* <Footer style={{ textAlign: "center" }}>
           JIB ©{getCurrentYear()} Created by JIB
-        </Footer>
+        </Footer> */}
       </Layout>
     </Layout>
   );

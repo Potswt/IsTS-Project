@@ -1,4 +1,4 @@
-import { InboxOutlined } from "@ant-design/icons";
+import { BellOutlined } from "@ant-design/icons";
 import { Badge, Dropdown, List, Avatar, Button } from "antd";
 import { useState } from "react";
 
@@ -66,7 +66,7 @@ const NotiFications = () => {
       placement="bottomRight"
       onOpenChange={handleMenuClick}>
       <Badge count={unreadCount} overflowCount={99}>
-        <InboxOutlined
+        <BellOutlined
           style={{ fontSize: "24px", cursor: "pointer", color: "white" }}
         />
       </Badge>
