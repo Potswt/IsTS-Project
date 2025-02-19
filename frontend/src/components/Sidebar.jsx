@@ -74,10 +74,10 @@ const Sidebar = () => {
     {
       key: "2",
       label: (
-        <a href="login" style={{ display: "flex", alignItems: "center" }}>
+        <NavLink to="/login" style={{ display: "flex", alignItems: "center" }}>
           <LogoutOutlined />
           <span style={{ marginLeft: "8px" }}>Logout</span>
-        </a>
+        </NavLink>
       ),
     },
   ];

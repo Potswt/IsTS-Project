@@ -8,7 +8,7 @@ const formItemLayout = {
       span: 24,
     },
     sm: {
-      span: 6,
+      span: 24,
     },
   },
   wrapperCol: {
@@ -16,14 +16,13 @@ const formItemLayout = {
       span: 24,
     },
     sm: {
-      span: 14,
+      span: 24,
     },
   },
 };
 
 const RegisterForm = () => {
   const [form] = Form.useForm();
-  const variant = Form.useWatch("variant", form);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
@@ -122,7 +121,7 @@ const RegisterForm = () => {
         if (response.ok) {
           const data = await response.json();
           console.log("Form submitted successfully:", data);
-          navigate("/success"); // Navigate to success page
+          navigate("/login");
         } else {
           console.error("Form submission failed:", response.statusText);
           message.error("การส่งแบบฟอร์มล้มเหลว กรุณาลองใหม่อีกครั้ง");
@@ -136,10 +135,9 @@ const RegisterForm = () => {
 
   return (
     <Form
-      className="w-80 max-w-md p-4"
+      className="w-full max-w-md p-4"
       {...formItemLayout}
       form={form}
-      variant={variant || "filled"}
       initialValues={{
         variant: "filled",
       }}>
@@ -152,130 +150,180 @@ const RegisterForm = () => {
           />
         </span>
       </div>
-      <div className="overflow-auto" style={{ height: "400px" }}>
-        <div className="gap-4 grid lg:grid-cols-2 mb-4">
-          <label>
-            <p className="mb-2">ชื่อ</p>
-            <Input
-              placeholder="ชื่อ"
-              size="large"
+      <div className="overflow-auto " style={{ height: "400px" }}>
+        <div className="grid lg:grid-cols-2 gap-2">
+          <div>
+            <p className="pb-2">ชื่อ</p>
+            <Form.Item
               name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            <p className="mb-2">นามสกุล</p>
-            <Input
-              placeholder="นามสกุล"
-              size="large"
+              rules={[{ required: true, message: "กรุณากรอกชื่อ!" }]}>
+              <Input
+                placeholder="ชื่อ"
+                size="large"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+              />
+            </Form.Item>
+          </div>
+          <div>
+            <p className="pb-2">นามสกุล</p>
+            <Form.Item
               name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-            />
-          </label>
+              rules={[{ required: true, message: "กรุณากรอกนามสกุล!" }]}>
+              <Input
+                placeholder="นามสกุล"
+                size="large"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+              />
+            </Form.Item>
+          </div>
         </div>
-        <div className="gap-4 grid lg:grid-cols-1 mb-4">
-          <label className="grid lg:grid-cols-1">
-            <p className="mb-2">รหัสพนักงาน</p>
-            <Select
-              showSearch
-              placeholder="กรุณาเลือกรหัสพนักงาน"
-              optionFilterProp="label"
-              filterSort={(optionA, optionB) =>
-                (optionA?.label ?? "")
-                  .toLowerCase()
-                  .localeCompare((optionB?.label ?? "").toLowerCase())
-              }
-              size="large"
-              value={formData.employeeId}
-              onChange={(value) => handleSelectChange(value, "employeeId")}
-              options={employeeIdOptions}
-            />
-          </label>
-          <label className="grid lg:grid-cols-1">
-            <p className="mb-2">เลือกแผนก</p>
-            <Select
-              showSearch
-              placeholder="กรุณาเลือกแผนก"
-              optionFilterProp="label"
-              filterSort={(optionA, optionB) =>
-                (optionA?.label ?? "")
-                  .toLowerCase()
-                  .localeCompare((optionB?.label ?? "").toLowerCase())
-              }
-              size="large"
-              value={formData.department}
-              onChange={(value) => handleSelectChange(value, "department")}
-              options={departmentOptions}
-            />
-          </label>
-          <label className="grid lg:grid-cols-1">
-            <p className="mb-2">เลือกตำแหน่ง</p>
-            <Select
-              showSearch
-              placeholder="กรุณาเลือกตำแหน่ง"
-              optionFilterProp="label"
-              filterSort={(optionA, optionB) =>
-                (optionA?.label ?? "")
-                  .toLowerCase()
-                  .localeCompare((optionB?.label ?? "").toLowerCase())
-              }
-              size="large"
-              value={formData.position}
-              onChange={(value) => handleSelectChange(value, "position")}
-              options={positionOptions}
-            />
-          </label>
-          <label className="grid lg:grid-cols-1">
-            <p className="mb-2">เบอร์โทรศัพท์</p>
-            <Input
-              type="phonenumber"
-              placeholder="กรอกเบอร์โทรศัพท์"
-              size="large"
+        <div className="grid lg:grid-cols-1 gap-2">
+          <div>
+            <p className="pb-2">รหัสพนักงาน</p>
+            <Form.Item
+              name="employeeId"
+              rules={[{ required: true, message: "กรุณาเลือกรหัสพนักงาน!" }]}>
+              <Select
+                showSearch
+                placeholder="รหัสพนักงาน"
+                optionFilterProp="label"
+                filterSort={(optionA, optionB) =>
+                  (optionA?.label ?? "")
+                    .toLowerCase()
+                    .localeCompare((optionB?.label ?? "").toLowerCase())
+                }
+                size="large"
+                value={formData.employeeId}
+                onChange={(value) => handleSelectChange(value, "employeeId")}
+                options={employeeIdOptions}
+              />
+            </Form.Item>
+          </div>
+          <div>
+            <p className="pb-2">แผนก</p>
+            <Form.Item
+              name="department"
+              rules={[{ required: true, message: "กรุณาเลือกแผนก!" }]}>
+              <Select
+                showSearch
+                placeholder="กรุณาเลือกแผนก"
+                optionFilterProp="label"
+                filterSort={(optionA, optionB) =>
+                  (optionA?.label ?? "")
+                    .toLowerCase()
+                    .localeCompare((optionB?.label ?? "").toLowerCase())
+                }
+                size="large"
+                value={formData.department}
+                onChange={(value) => handleSelectChange(value, "department")}
+                options={departmentOptions}
+              />
+            </Form.Item>
+          </div>
+          <div>
+            <p className="pb-2">ตำแหน่ง</p>
+            <Form.Item
+              name="position"
+              rules={[{ required: true, message: "กรุณาเลือกตำแหน่ง!" }]}>
+              <Select
+                showSearch
+                placeholder="กรุณาเลือกตำแหน่ง"
+                optionFilterProp="label"
+                filterSort={(optionA, optionB) =>
+                  (optionA?.label ?? "")
+                    .toLowerCase()
+                    .localeCompare((optionB?.label ?? "").toLowerCase())
+                }
+                size="large"
+                value={formData.position}
+                onChange={(value) => handleSelectChange(value, "position")}
+                options={positionOptions}
+              />
+            </Form.Item>
+          </div>
+          <div>
+            <p className="pb-2">เบอร์โทรศัพท์</p>
+            <Form.Item
               name="phonenumber"
-              value={formData.phonenumber}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            <p className="mb-2">Email</p>
-            <Input
-              type="email"
-              placeholder="email@gmail.com"
-              className="mt-4"
-              size="large"
+              rules={[{ required: true, message: "กรุณากรอกเบอร์โทรศัพท์!" }]}>
+              <Input
+                type="phonenumber"
+                placeholder="กรอกเบอร์โทรศัพท์"
+                size="large"
+                name="phonenumber"
+                value={formData.phonenumber}
+                onChange={handleChange}
+              />
+            </Form.Item>
+          </div>
+          <div>
+            <p className="pb-2">อีเมล</p>
+            <Form.Item
               name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </label>
-          <label className="grid lg:grid-cols-1">
-            <p className="mb-2">รหัสผ่าน</p>
-            <Input
-              type="password"
-              placeholder="กรอกรหัสผ่าน"
-              size="large"
+              rules={[
+                { required: true, message: "กรุณากรอกอีเมล!" },
+                { type: "email", message: "กรุณากรอกอีเมลที่ถูกต้อง!" },
+              ]}>
+              <Input
+                type="email"
+                placeholder="email@gmail.com"
+                className="mt-4"
+                size="large"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </Form.Item>
+          </div>
+          <div>
+            <p className="pb-2">รหัสผ่าน</p>
+            <Form.Item
               name="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-          </label>
-          <label className="grid lg:grid-cols-1">
-            <p className="mb-2">ยืนยันรหัสผ่าน</p>
-            <Input
-              type="password"
-              placeholder="ยืนยันรหัสผ่าน"
-              size="large"
+              rules={[{ required: true, message: "กรุณากรอกรหัสผ่าน!" }]}>
+              <Input
+                type="password"
+                placeholder="กรอกรหัสผ่าน"
+                size="large"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+            </Form.Item>
+          </div>
+          <div>
+            <p className="pb-2">ยืนยันรหัสผ่าน</p>
+            <Form.Item
               name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-            />
-          </label>
+              dependencies={["password"]}
+              rules={[
+                { required: true, message: "กรุณายืนยันรหัสผ่านใหม่!" },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue("password") === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(new Error("รหัสผ่านไม่ตรงกัน!"));
+                  },
+                }),
+              ]}>
+              <Input
+                type="password"
+                placeholder="ยืนยันรหัสผ่าน"
+                size="large"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+              />
+            </Form.Item>
+          </div>
         </div>
       </div>
 
-      <div className="gap-2 grid lg:grid-cols-2 mt-15 mb-6">
+      <div className="gap-4 grid lg:grid-cols-2 mt-15 mb-6">
         <Button onClick={() => navigate("/login")} size={"large"}>
           Cancel
         </Button>
@@ -295,4 +343,5 @@ const RegisterForm = () => {
     </Form>
   );
 };
+
 export default RegisterForm;

@@ -5,7 +5,7 @@ import Register from "./pages/Register";
 import NotFound from "./components/NotFound";
 import Issuestable from "./pages/Issuestable";
 import DashboardLayout from "./layout/DashboardLayout";
-import Settings from "./components/Settings/Settings";
+import Settings from "./pages/Settings";
 import Messages from "./pages/Messages";
 import Reports from "./pages/Reports";
 import ForgotPassword from "./pages/ForgotPassword";

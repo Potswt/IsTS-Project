@@ -1,6 +1,6 @@
 import { Layout, Tabs } from "antd";
-import AccountSettings from "./AccountSettings";
-import ChangePassword from "./ChangePassword";
+import AccountSettings from "../components/Settings/AccountSettings";
+import ChangePassword from "../components/Settings/ChangePassword";
 
 const { Content } = Layout;
 

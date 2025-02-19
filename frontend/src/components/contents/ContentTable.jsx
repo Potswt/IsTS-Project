@@ -131,24 +131,28 @@ const ContentTable = () => {
       title: "Issue ID",
       dataIndex: "id",
       key: "id",
+      width: "10%",
       ...SearchColumn("id"),
     },
     {
       title: "Issue",
       dataIndex: "issue",
       key: "issue",
+      width: "20%",
       ...SearchColumn("issue"),
     },
     {
       title: "Date",
       dataIndex: "date",
       key: "date",
+      width: "10%",
       ...SearchColumn("date", true),
     },
     {
       title: "Employee",
       dataIndex: "employee",
       key: "employee",
+      width: "10%",
       ...SearchColumn("employee"),
       render: (text, record) => (
         <Space>
@@ -164,6 +168,7 @@ const ContentTable = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
+      width: "11%",
       render: (text, record) => (
         <StatusColumn
           text={text}
@@ -175,6 +180,7 @@ const ContentTable = () => {
     {
       title: "Actions",
       key: "6",
+      width: "10%",
       render: (_, record) => (
         <Space>
           <Button onClick={() => showModal(record)} icon={<EditOutlined />} />
@@ -220,7 +226,7 @@ const ContentTable = () => {
               transition: "background-color 0.3s",
               border: "none",
             }}>
-            <PlusCircleOutlined /> Add Issue
+            <PlusCircleOutlined /> เพิ่มปัญหา
           </Button>
           <Button
             onMouseEnter={(e) => (e.target.style.backgroundColor = "#193CB8")}

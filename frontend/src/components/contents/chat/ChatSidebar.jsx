@@ -26,7 +26,6 @@ const ChatSidebar = ({ onSelectUser }) => {
       { id: 13, name: "User 13", avatar: "https://i.pravatar.cc/150?img=13" },
       { id: 14, name: "User 14", avatar: "https://i.pravatar.cc/150?img=14" },
       { id: 15, name: "User 15", avatar: "https://i.pravatar.cc/150?img=15" },
-      
     ]);
   }, []);
 
@@ -42,7 +41,6 @@ const ChatSidebar = ({ onSelectUser }) => {
         onChange={(e) => setSearchTerm(e.target.value)}
         style={{ marginBottom: 16 }}
       />
-
       <div style={{ overflowY: "auto", height: "calc(100% - 56px)" }}>
         <List
           dataSource={filteredUsers}

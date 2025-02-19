@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useForm } from "antd/es/form/Form";
-import { Modal, Form, Input, DatePicker, Select, Tag } from "antd";
+import { Modal, Form, Input, DatePicker, Select, Tag, message } from "antd";
 import {
   CheckCircleOutlined,
   ClockCircleOutlined,
@@ -36,12 +36,13 @@ const IssueModal = ({ visible, onOk, onCancel, editingRecord }) => {
   const handleOk = () => {
     form.validateFields().then((values) => {
       onOk(values);
+      message.success("Requested add issue successfully!");
     });
   };
 
   return (
     <Modal
-      title={editingRecord ? "Edit Issue" : "Add Issue"}
+      title={editingRecord ? "แก้ไขปัญหา" : "เพิ่มปัญหา"}
       open={visible}
       onOk={handleOk}
       onCancel={onCancel}>
@@ -52,29 +53,29 @@ const IssueModal = ({ visible, onOk, onCancel, editingRecord }) => {
         <Form.Item
           name="issue"
           label="Issue"
-          rules={[{ required: true, message: "Please input the issue!" }]}>
+          rules={[{ required: true, message: "กรุณากรอกปัญหา!" }]}>
           <Input />
         </Form.Item>
         <Form.Item
           name="date"
           label="Date"
-          rules={[{ required: true, message: "Please select the date!" }]}>
+          rules={[{ required: true, message: "กรุณาเลือกวันที่!" }]}>
           <DatePicker />
         </Form.Item>
         <Form.Item
           name="employee"
           label="Employee"
-          rules={[{ required: true, message: "Please input the employee!" }]}>
+          rules={[{ required: true, message: "กรุณากรอกชื่อพนักงาน!" }]}>
           <Input />
         </Form.Item>
         <Form.Item
           name="status"
           label="Status"
-          rules={[{ required: true, message: "Please select the status!" }]}>
+          rules={[{ required: true, message: "กรุณาเลือกสถานะ!" }]}>
           <Select>
             <Option value="เสร็จสิ้น">
               <Tag
-                bordered={false}
+                variant="false"
                 icon={<CheckCircleOutlined />}
                 color={statusColors["เสร็จสิ้น"]}>
                 เสร็จสิ้น
@@ -82,7 +83,7 @@ const IssueModal = ({ visible, onOk, onCancel, editingRecord }) => {
             </Option>
             <Option value="รอดำเนินการ">
               <Tag
-                bordered={false}
+                variant="false"
                 icon={<ClockCircleOutlined />}
                 color={statusColors["รอดำเนินการ"]}>
                 รอดำเนินการ
@@ -90,7 +91,7 @@ const IssueModal = ({ visible, onOk, onCancel, editingRecord }) => {
             </Option>
             <Option value="กำลังดำเนินการ">
               <Tag
-                bordered={false}
+                variant="false"
                 icon={<SyncOutlined spin />}
                 color={statusColors["กำลังดำเนินการ"]}>
                 กำลังดำเนินการ
@@ -98,7 +99,7 @@ const IssueModal = ({ visible, onOk, onCancel, editingRecord }) => {
             </Option>
             <Option value="ถูกปฏิเสธ">
               <Tag
-                bordered={false}
+                variant="false"
                 icon={<CloseCircleOutlined />}
                 color={statusColors["ถูกปฏิเสธ"]}>
                 ถูกปฏิเสธ

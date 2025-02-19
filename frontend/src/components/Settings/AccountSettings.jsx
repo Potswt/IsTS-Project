@@ -6,6 +6,27 @@ const AccountSettings = () => {
   const [form] = Form.useForm();
   const [profilePic, setProfilePic] = useState("https://i.pravatar.cc/150");
 
+  const departmentOptions = [
+    { label: "HR", value: "hr" },
+    { label: "Engineering", value: "engineering" },
+    { label: "Marketing", value: "marketing" },
+    { label: "Sales", value: "sales" },
+    { label: "Finance", value: "finance" },
+    { label: "IT", value: "it" },
+    { label: "Operation", value: "operation" },
+    { label: "Admin", value: "admin" },
+    { label: "Others", value: "others" },
+  ];
+
+  const positionOptions = [
+    { label: "Manager", value: "manager" },
+    { label: "Team Lead", value: "team_lead" },
+    { label: "Senior Developer", value: "senior_developer" },
+    { label: "Junior Developer", value: "junior_developer" },
+    { label: "Intern", value: "intern" },
+    // Add more positions as needed
+  ];
+
   const handleUpload = (info) => {
     if (info.file.status === "done") {
       // Get this url from response in real world.
@@ -56,11 +77,17 @@ const AccountSettings = () => {
           </Form.Item>
         </Col>
       </Row>
-      <Form.Item
-        name="email"
-        label="อีเมล"
-        rules={[{ required: true, message: "กรุณาใส่อีเมล!" }]}>
-        <Input size={"large"} />
+      <Form.Item name="employeeId" label="รหัสพนักงาน">
+        <Input size={"large"} disabled />
+      </Form.Item>
+      <Form.Item name="department" label="แผนก">
+        <Input size={"large"} options={departmentOptions} disabled />
+      </Form.Item>
+      <Form.Item name="position" label="ตำแหน่ง">
+        <Input size={"large"} options={positionOptions} disabled />
+      </Form.Item>
+      <Form.Item name="email" label="อีเมล">
+        <Input size={"large"} readOnly />
       </Form.Item>
 
       <Form.Item

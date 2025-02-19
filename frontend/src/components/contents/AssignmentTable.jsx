@@ -107,24 +107,28 @@ const AssignmentTable = () => {
       title: "Issue ID",
       dataIndex: "id",
       key: "id",
+      width: "10%",
       ...SearchColumn("id"),
     },
     {
       title: "Issue",
       dataIndex: "issue",
       key: "issue",
+      width: "20%",
       ...SearchColumn("issue"),
     },
     {
       title: "Date",
       dataIndex: "date",
       key: "date",
+      width: "10%",
       ...SearchColumn("date", true),
     },
     {
       title: "Employee",
       dataIndex: "employee",
       key: "employee",
+      width: "10%",
       ...SearchColumn("employee"),
       render: (text) => (
         <Space>
@@ -140,6 +144,7 @@ const AssignmentTable = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
+      width: "11%",
       render: (text, record) => (
         <StatusColumn
           text={text}
@@ -152,11 +157,13 @@ const AssignmentTable = () => {
       title: "Assignees",
       dataIndex: "assignees",
       key: "assignees",
+      width: "20%",
       render: (assignees) => <AssigneesColumn assignees={assignees} />,
     },
     {
       title: "Actions",
       key: "6",
+      width: "5%",
       render: (_, record) => (
         <ActionsColumn
           record={record}

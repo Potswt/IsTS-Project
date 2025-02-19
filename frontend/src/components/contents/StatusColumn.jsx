@@ -19,37 +19,43 @@ const statusColors = {
 const StatusColumn = ({ text, record, handleStatusChange }) => (
   <Select
     value={text}
-    style={{ width: 130 }}
-    onChange={(value) => handleStatusChange(record.key, value)}>
+    style={{ width: "100%" }}
+    onChange={(value) => handleStatusChange(record.key, value)}
+    variant="false"
+    dropdownStyle={{ border: "none" }}>
     <Option value="เสร็จสิ้น">
       <Tag
-        bordered={false}
+        variant="false"
         icon={<CheckCircleOutlined />}
-        color={statusColors["เสร็จสิ้น"]}>
+        color={statusColors["เสร็จสิ้น"]}
+        style={{ cursor: "pointer" }}>
         เสร็จสิ้น
       </Tag>
     </Option>
     <Option value="รอดำเนินการ">
       <Tag
-        bordered={false}
+        variant="false"
         icon={<ClockCircleOutlined />}
-        color={statusColors["รอดำเนินการ"]}>
+        color={statusColors["รอดำเนินการ"]}
+        style={{ cursor: "pointer" }}>
         รอดำเนินการ
       </Tag>
     </Option>
     <Option value="กำลังดำเนินการ">
       <Tag
-        bordered={false}
+        variant="false"
         icon={<SyncOutlined spin />}
-        color={statusColors["กำลังดำเนินการ"]}>
+        color={statusColors["กำลังดำเนินการ"]}
+        style={{ cursor: "pointer" }}>
         กำลังดำเนินการ
       </Tag>
     </Option>
     <Option value="ถูกปฏิเสธ">
       <Tag
-        bordered={false}
+        variant="false"
         icon={<CloseCircleOutlined />}
-        color={statusColors["ถูกปฏิเสธ"]}>
+        color={statusColors["ถูกปฏิเสธ"]}
+        style={{ cursor: "pointer" }}>
         ถูกปฏิเสธ
       </Tag>
     </Option>
