@@ -1,6 +1,6 @@
-import { Layout } from "antd";
-import ContentReports from "../components/contents/ContentReports";
 import { Content } from "antd/es/layout/layout";
+import ContentReports from "../components/contents/ContentReports";
+import { Layout } from "antd";
 
 const Reports = () => {
   return (
@@ -14,7 +14,7 @@ const Reports = () => {
         style={{
           padding: 24,
         }}>
-        <ContentReports />;
+        <ContentReports />
       </Content>
     </Layout>
   );
