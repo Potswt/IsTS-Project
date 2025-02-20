@@ -10,7 +10,7 @@ import {
   Pagination,
 } from "antd";
 import { Content } from "antd/es/layout/layout";
-import AssignmentTable from "./AssignmentTable";
+import AssignmentTable from "../assignment-table/AssignmentTable";
 import TopCard from "../TopCard";
 import { useState, useEffect } from "react";
 import ListSkeleton from "../skeletons/ListSkeleton"; // Import ListSkeleton

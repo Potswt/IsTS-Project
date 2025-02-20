@@ -10,10 +10,10 @@ import {
   LayoutOutlined,
 } from "@ant-design/icons";
 import { Link, NavLink, useLocation } from "react-router";
-import logo from "../assets/jib-logo-2.png";
+import logo from "../../assets/jib-logo-2.png";
 import { Content } from "antd/es/layout/layout";
 import { Outlet } from "react-router";
-import NotiFications from "./NotiFications";
+import NotiFications from "../NotiFications";
 
 const { Header, Sider } = Layout;
 

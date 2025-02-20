@@ -1,9 +1,9 @@
-import Sidebar from "../components/Navbar/Sidebar";
+import UsersSidebar from "../components/Navbar/UsersSidebar"
 
 const DashboardLayout = () => {
   return (
     <div>
-      <Sidebar />
+      <UsersSidebar />
     </div>
   );
 };

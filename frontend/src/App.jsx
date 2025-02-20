@@ -10,6 +10,8 @@ import Messages from "./pages/Messages";
 import Reports from "./pages/Reports";
 import ForgotPassword from "./pages/ForgotPassword";
 import Overview from "./pages/Overview";
+import UserDashboardLayout from "./layout/UserDashboardLayout"; // Import UserDashboardLayout
+import UserHome from "./pages/UserHome"; // Import UserHome
 
 const App = () => {
   return (
@@ -26,6 +28,10 @@ const App = () => {
           <Route path="messages" element={<Messages />} />
           <Route path="reports" element={<Reports />} />
           <Route path="settings" element={<Settings />} />
+        </Route>
+        {/* User Dashboard Routes */}
+        <Route path="user" element={<UserDashboardLayout />}>
+          <Route path="home" element={<UserHome />} />
         </Route>
         {/* Catch-all Route */}
         <Route path="*" element={<NotFound />} />

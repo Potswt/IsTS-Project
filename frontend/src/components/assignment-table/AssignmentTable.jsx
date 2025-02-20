@@ -10,8 +10,8 @@ import {
   Avatar,
 } from "antd";
 import { ReloadOutlined, DownOutlined, UserOutlined } from "@ant-design/icons";
-import SearchColumn from "./SearchColumn";
-import StatusColumn from "./StatusColumn";
+import SearchColumn from "../contents/SearchColumn";
+import StatusColumn from "../contents/StatusColumn";
 import AssigneesColumn from "./AssigneesColumn";
 import ActionsColumn from "./ActionsColumn";
 import TableSkeleton from "../skeletons/TableSkeleton"; // Import TableSkeleton
