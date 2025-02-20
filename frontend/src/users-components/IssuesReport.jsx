@@ -84,7 +84,15 @@ const IssuesReport = () => {
               type="primary"
               icon={<PlusOutlined />}
               onClick={handleAddIssue}
-              style={{ marginLeft: "auto" }}>
+              style={{
+                marginLeft: "auto",
+                backgroundColor: "#262362",
+                transition: "background-color 0.3s",
+              }}
+              onMouseEnter={(e) => (e.target.style.backgroundColor = "#193CB8")}
+              onMouseLeave={(e) =>
+                (e.target.style.backgroundColor = "#262362")
+              }>
               เพิ่มปัญหา
             </Button>
           </div>
