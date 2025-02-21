@@ -1,5 +1,5 @@
-import { Button, Checkbox, Input, Form } from "antd";
-import { Link } from "react-router";
+import { Button, Checkbox, Input, Form, message } from "antd";
+import { Link, useNavigate } from "react-router";
 import { useState } from "react";
 
 const onChange = (e) => {
@@ -28,6 +28,7 @@ const formItemLayout = {
 const LoginForm = () => {
   const [form] = Form.useForm();
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   const variant = Form.useWatch("variant", form);
 
   const handleLogin = () => {
@@ -37,7 +38,7 @@ const LoginForm = () => {
         console.log("Success:", values);
         setError("");
         // Call the API to login
-        fetch("https://api.example.com/login", {
+        fetch("http://172.18.43.39:5000/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -46,9 +47,13 @@ const LoginForm = () => {
         })
           .then((response) => response.json())
           .then((data) => {
+            console.log("Data:", data);
             if (data.success) {
               console.log("Login successful:", data);
-              // Redirect or perform other actions on successful login
+              message.success(
+                "Welcome to the Issue Support and Tracking System!"
+              );
+              navigate("/"); // Redirect to the home page or dashboard
             } else {
               setError(data.message || "Login failed");
             }

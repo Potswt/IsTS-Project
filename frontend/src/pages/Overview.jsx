@@ -1,18 +1,10 @@
-import { useEffect } from "react";
-import { Layout, message } from "antd";
+import { Layout } from "antd";
 
 import ContentOverview from "../components/contents/ContentOverview";
 
 const { Content } = Layout;
 
 const Overview = () => {
-  useEffect(() => {
-    if (!message.isOpen) {
-      message.success("Welcome to the Issue Support and Tracking System!");
-      message.isOpen = true;
-    }
-  }, []);
-
   return (
     <Layout>
       <div className="pl-8 pt-5 pb-2">

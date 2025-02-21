@@ -6,7 +6,7 @@ import ChatSidebar from "./ChatSidebar";
 import NoChatSelected from "./NoChatSelect";
 import { Send, Paperclip, X } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
-import { motion } from "framer-motion"; // Import framer-motion for animations
+import { motion } from "framer-motion";
 
 const ContentMessages = () => {
   const {
@@ -18,45 +18,37 @@ const ContentMessages = () => {
   const [file, setFile] = useState(null);
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
-  // Handle user selection from the sidebar
   const handleSelectUser = (user) => {
     setSelectedUser(user);
-    setMessages([]); // Clear messages when a new user is selected
+    setMessages([]);
   };
 
-  // Clear the selected user
-  const handleClearUser = () => {
-    setSelectedUser(null);
-  };
+  const handleClearUser = () => setSelectedUser(null);
 
-  // Handle sending a message
   const handleSendMessage = () => {
     if (message.trim() || file) {
-      const newMessage = {
-        id: messages.length + 1,
-        text: message,
-        file: file ? URL.createObjectURL(file) : null,
-        sender: "me",
-        timestamp: new Date().toLocaleTimeString(),
-      };
-      setMessages([...messages, newMessage]);
+      setMessages([
+        ...messages,
+        {
+          id: messages.length + 1,
+          text: message,
+          file: file ? URL.createObjectURL(file) : null,
+          sender: "me",
+          timestamp: new Date().toLocaleTimeString(),
+        },
+      ]);
       setMessage("");
       setFile(null);
     }
   };
 
-  // Handle file attachment
   const handleAttachFile = (file) => {
     setFile(file);
-    return false; // Prevent default upload behavior
+    return false;
   };
 
-  // Remove the attached file
-  const handleRemoveFile = () => {
-    setFile(null);
-  };
+  const handleRemoveFile = () => setFile(null);
 
-  // Handle pressing the Enter key to send a message
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -72,8 +64,8 @@ const ContentMessages = () => {
         padding: 24,
         borderRadius: borderRadiusLG,
         background: colorBgContainer,
-        overflow: "hidden", // Prevent overflow
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Add drop shadow
+        overflow: "hidden",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
       }}>
       <motion.div
         initial={{ opacity: 0 }}
@@ -86,21 +78,18 @@ const ContentMessages = () => {
           height: "100%",
         }}>
         {isMobile && !selectedUser ? (
-          // Display sidebar only on mobile when no user is selected
           <div style={{ height: "100%", overflow: "hidden" }}>
             <ChatSidebar onSelectUser={handleSelectUser} />
           </div>
         ) : (
           <>
             {!isMobile && (
-              // Display sidebar on larger screens
               <div style={{ height: "100%", overflow: "hidden" }}>
                 <ChatSidebar onSelectUser={handleSelectUser} />
               </div>
             )}
             <div className="flex-1 flex flex-col">
               {selectedUser && (
-                // Display chat header when a user is selected
                 <ChatHeader user={selectedUser} onClearUser={handleClearUser} />
               )}
               <motion.div
@@ -116,7 +105,6 @@ const ContentMessages = () => {
                 }}>
                 {!selectedUser && <NoChatSelected />}
                 {selectedUser && (
-                  // Display messages when a user is selected
                   <div>
                     {messages.map((msg) => (
                       <div
@@ -164,7 +152,6 @@ const ContentMessages = () => {
                 )}
               </motion.div>
               {selectedUser && (
-                // Display input area when a user is selected
                 <motion.div
                   initial={{ y: 50, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}

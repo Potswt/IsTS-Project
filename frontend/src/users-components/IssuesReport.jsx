@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Layout, Button, Input, theme } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import IssueFormModal from "./IssueFormModal";
 import IssueCard from "./IssueCard";
 import { Content } from "antd/es/layout/layout";
@@ -79,6 +79,7 @@ const IssuesReport = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               style={{ width: "300px", marginRight: "10px" }}
+              prefix={<SearchOutlined />}
             />
             <Button
               type="primary"
@@ -93,7 +94,7 @@ const IssuesReport = () => {
               onMouseLeave={(e) =>
                 (e.target.style.backgroundColor = "#262362")
               }>
-              เพิ่มปัญหา
+              เพิ่มคำร้อง
             </Button>
           </div>
         </div>

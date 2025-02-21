@@ -14,6 +14,7 @@ import logo from "../../assets/jib-logo-2.png";
 import { Content } from "antd/es/layout/layout";
 import { Outlet } from "react-router";
 import NotiFications from "../NotiFications";
+import { ShieldCheck } from "lucide-react";
 
 const { Header, Sider } = Layout;
 
@@ -37,6 +38,11 @@ const menuItems = [
     key: "4",
     icon: <PieChartOutlined />,
     label: <NavLink to="/reports">Reports</NavLink>,
+  },
+  {
+    key: "5",
+    icon: <ShieldCheck size={16} strokeWidth={1.25} absoluteStrokeWidth />,
+    label: <NavLink to="/manage-roles">Manage Roles</NavLink>,
   },
 ];
 
@@ -95,7 +101,7 @@ const Sidebar = () => {
         breakpoint="lg"
         collapsedWidth="50"
         className="bg-white"
-        width={160}>
+        width={170}>
         <div className="logo-container mt-6">
           <Link to="/">
             <img src={logo} alt="logo" />
